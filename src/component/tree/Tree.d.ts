@@ -3,7 +3,8 @@ import React from 'react';
 export interface TreeData {
     title?: string,
     key: string,
-    children?: TreeData[]
+    isLeaf?: boolean,
+    children: any[]
 }
 
 export interface TreeNodeProps {
@@ -12,7 +13,6 @@ export interface TreeNodeProps {
 
 export interface TreeProps {
     /** （受控）展开指定的树节点 */
-    expandedKeys?: string[] | never;
-    children?: React.ReactNode | React.ReactNode[];
+    expandedKeys?: string[];
     data: TreeData[]
 }

@@ -1,29 +1,48 @@
 import React from 'react';
 import {TreeNodeProps} from './Tree';
 
-const TreeNode = (props: TreeNodeProps) => {
+import ExpandedKeyContext from './context';
 
-    let {data} = props;
+class TreeNode extends React.Component<TreeNodeProps, any> {
 
-    return (
-        <div>
-            {
-                data.map((item) => (
-                    <div key={item.key}>
-                        <div className="tree-title-wrap">
-                            <span className={`tree-item-icon`}/>
-                            <span>{item.title}</span>
-                        </div>
-                        {
+    // static contextType = ExpandedKeyContext;
 
+    render() {
+        let {data} = this.props;
+        // let keys = this.context;
+
+        return (
+            <ExpandedKeyContext.Consumer>
+                {
+                    keys => data.map((item) => {
+                        let className, isOpenFolder = false;
+                        if (item.isLeaf) {
+                            className = 'tree-file'
+                        } else {
+                            // @ts-ignore
+                            isOpenFolder = keys.includes(item.key);
+                            className = isOpenFolder ? 'tree-folder-open' : 'tree-folder-close';
                         }
-                    </div>
-                ))
-            }
-        </div>
-    );
-
-};
+                        return (
+                            <div key={item.key}>
+                                <div className="tree-title-wrap">
+                                    <span className={`tree-item-icon ${className}`}/>
+                                    <span>{item.title}</span>
+                                </div>
+                                {
+                                    isOpenFolder ?
+                                        <TreeNode data={item.children}/>
+                                        :
+                                        null
+                                }
+                            </div>
+                        )
+                    })
+                }
+            </ExpandedKeyContext.Consumer>
+        );
+    }
+}
 
 
 

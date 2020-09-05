@@ -1,6 +1,6 @@
 
 .tree-item-icon {
-    display: inline;
+    display: inline-block;
     width: 16px;
     height: 16px;
 }
