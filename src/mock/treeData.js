@@ -10,13 +10,13 @@ let data = [
                 isLeaf: true,
             },
             {
-                title: '标题1-1',
-                key: '1-1',
+                title: '标题1-2',
+                key: '1-2',
                 isLeaf: true,
             },
             {
-                title: '标题1-1',
-                key: '1-1',
+                title: '标题1-3',
+                key: '1-3',
                 isLeaf: false,
                 children: [
                     {

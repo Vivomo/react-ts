@@ -5,16 +5,15 @@ import ExpandedKeyContext from './context';
 
 class TreeNode extends React.Component<TreeNodeProps, any> {
 
-    // static contextType = ExpandedKeyContext;
 
     render() {
         let {data} = this.props;
-        // let keys = this.context;
 
         return (
             <ExpandedKeyContext.Consumer>
                 {
-                    keys => data.map((item) => {
+                    // @ts-ignore
+                    ({keys, cb}) => data.map((item) => {
                         let className, isOpenFolder = false;
                         if (item.isLeaf) {
                             className = 'tree-file'
@@ -25,7 +24,11 @@ class TreeNode extends React.Component<TreeNodeProps, any> {
                         }
                         return (
                             <div key={item.key}>
-                                <div className="tree-title-wrap">
+                                <div className="tree-title-wrap" onClick={() => {
+                                    if (!item.isLeaf) {
+                                        cb(item.key);
+                                    }
+                                }}>
                                     <span className={`tree-item-icon ${className}`}/>
                                     <span>{item.title}</span>
                                 </div>
