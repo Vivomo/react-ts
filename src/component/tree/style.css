@@ -1,4 +1,6 @@
-
+.tree-wrap {
+    padding-left: 20px;
+}
 .tree-item-icon {
     display: inline-block;
     width: 16px;
