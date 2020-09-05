@@ -1,9 +1,10 @@
-import React from 'react';
 
 export interface TreeData {
     title?: string,
     key: string,
     isLeaf?: boolean,
+    creatTime: number,
+    updateTime: number,
     children: any[]
 }
 
